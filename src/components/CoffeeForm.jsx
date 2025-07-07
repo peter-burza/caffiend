@@ -4,6 +4,13 @@ import { coffeeOptions } from "../utils"
 export default function CoffeeForm() {
     const [showCoffeeTypes, setShowCoffeeTypes] = useState(false)
     const [selectedCoffee, setSelectedCoffee] = useState(null)
+    const [coffeeCost, setCoffeeCost] = useState(0)
+    const [hour, setHour] = useState(0)
+    const [min, setMin] = useState(0)
+
+    function handleSubmitForm() {
+        console.log(selectedCoffee, coffeeCost, hour, min)
+    }
 
 
     return (
@@ -49,12 +56,16 @@ export default function CoffeeForm() {
                 </select>
             }
             <h1>Add the cost ($)</h1>
-            <input type="number" className="w-full" placeholder="4.50" />
+            <input type="number" className="w-full" placeholder="4.50" value={coffeeCost} onChange={(e) => {
+                setCoffeeCost(e.target.value)
+            }} />
             <h4>Time since consumption</h4>
             <div className="time-entry">
                 <div>
                     <h6>Hours</h6>
-                    <select id="hours-select">
+                    <select id="hours-select" onChange={((e) => {
+                        setHour(e.target.value)
+                    })}>
                         {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23].map((hour, hourIndex) => {
                             return (
                                 <option key={hourIndex} value={hour}>{hour}</option>
@@ -64,7 +75,9 @@ export default function CoffeeForm() {
                 </div>
                 <div>
                     <h6>Minutes</h6>
-                    <select id="mins-select">
+                    <select id="mins-select" onChange={((e) => {
+                        setMin(e.target.value)
+                    })}>
                         {[0, 5, 15, 30, 45].map((minute, minuteIndex) => {
                             return (
                                 <option key={minuteIndex} value={minute}>{minute}</option>
@@ -73,7 +86,7 @@ export default function CoffeeForm() {
                     </select>
                 </div>
             </div>
-            <button>Add Entry</button>
+            <button onClick={handleSubmitForm}>Add Entry</button>
         </>
     )
 }
