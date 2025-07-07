@@ -24,9 +24,9 @@ export function AuthProvider(props) {
         return signInWithEmailAndPassword(auth, email, password)
     }
 
-    function resetPassword(email) {
-        return sendPasswordResetEmail(auth, email)
-    }
+    // function resetPassword(email) {
+    //     return sendPasswordResetEmail(auth, email)
+    // }
 
     function logout() {
         setGlobalUser(null)
@@ -38,7 +38,6 @@ export function AuthProvider(props) {
 
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, async (user) => {
-            console.log('CURRENT USER: ', user)
             setGlobalUser(user)
             // if ther's no user, empty the user state and return from this listener
 
@@ -58,8 +57,8 @@ export function AuthProvider(props) {
 
                 let firebaseData = {}
                 if (docSnap.exists()) {
-                    console.log('Found user data')
                     firebaseData = docSnap.data()
+                    console.log('Found user data: ', firebaseData)
                 }
                 setGlobalData(firebaseData)
             } catch (err) {
