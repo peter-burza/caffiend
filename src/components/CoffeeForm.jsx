@@ -52,10 +52,10 @@ export default function CoffeeForm(props) {
                 [timestamp]: newData
             }, { merge: true })
             
-            setSelectedCoffee(null)
             setHour(0)
             setMin(0)
             setCoffeeCost(0)
+            setSelectedCoffee(null)
         } catch (err) {
             console.log(err)
         } finally {
